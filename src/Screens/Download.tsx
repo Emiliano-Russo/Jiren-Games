@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function App() {
+export function Download() {
   return (
     <div>
-      <h1>Download</h1>
+      <h3>Download coming soon...</h3>
     </div>
   );
 }

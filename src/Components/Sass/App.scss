@@ -1,6 +1,11 @@
+$color-a: #f5f5f5;
+$color-b: #121212;
+$color-c: #f05454;
+$color-d: #30475e;
+
 .App {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   text-align: center;
-  background-color: rgb(19, 207, 207);
-  color: aliceblue;
+  background-color: $color-a;
+  color: $color-b;
 }

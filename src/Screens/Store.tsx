@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function App() {
+export function Store() {
   return (
     <div>
-      <h1>Store</h1>
+      <h3>Store coming soon...</h3>
     </div>
   );
 }

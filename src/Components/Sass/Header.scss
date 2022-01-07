@@ -1,0 +1,29 @@
+@import "./App.scss";
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5rem;
+  color: $color-c;
+  #links {
+    //border: 1px solid $secondary-color-light;
+    width: 20rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.activeLink {
+  color: $color-c;
+  font-weight: bold;
+}
+
+.idleLink {
+  color: $color-d;
+}
+
+.link {
+  text-decoration: none;
+}

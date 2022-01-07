@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function App() {
+export function Library() {
   return (
     <div>
-      <h1>Library</h1>
+      <h3>Library coming soon...</h3>
     </div>
   );
 }
