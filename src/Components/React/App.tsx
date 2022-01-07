@@ -3,6 +3,8 @@ import "../Sass/App.css";
 import React, { useState, useEffect } from "react";
 
 export default function App() {
+  useEffect(() => {}, []);
+
   return (
     <div className="App">
       <h1>Palladium Games</h1>
