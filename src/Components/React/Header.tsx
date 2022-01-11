@@ -5,7 +5,7 @@ import "../Sass/Header.scss";
 export function Header() {
   return (
     <div className="header">
-      <h1>Palladium Games</h1>
+      <h1>Jiren Entertainment</h1>
       <div id="links">
         <NavLink
           to="/"

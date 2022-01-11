@@ -1,0 +1,15 @@
+@import "./App.scss";
+
+.gameCard {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 20rem;
+  margin: 5rem;
+  padding-bottom: 1rem;
+  img {
+    width: 100%;
+  }
+  h2 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}

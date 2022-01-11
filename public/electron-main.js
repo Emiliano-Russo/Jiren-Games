@@ -10,6 +10,7 @@ const createWindow = () => {
     webPreferences: {
       devTools: isDev, // toggles whether devtools are available. to use node write window.require('<node-name>')
       nodeIntegration: true, // turn this off if you don't mean to use node
+      enableRemoteModule: true,
     },
   });
 
@@ -48,3 +49,6 @@ app.on("window-all-closed", () => {
 // code. You can also put them in separate files and require them here.
 
 // to access anything in here use window.require('electron').remote
+
+// main process, for example app/main.js
+exports.test = () => console.log("Yay");

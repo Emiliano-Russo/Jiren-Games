@@ -3,9 +3,9 @@ import "../Sass/App.scss";
 import React, { useState, useEffect } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./Header";
-import { Download } from "../../Screens/Download";
-import { Store } from "../../Screens/Store";
-import { Library } from "../../Screens/Library";
+import { Download } from "../../Screens/React/Download";
+import { Store } from "../../Screens/React/Store";
+import { Library } from "../../Screens/React/Library";
 
 export default function App() {
   useEffect(() => {}, []);
