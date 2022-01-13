@@ -5,6 +5,9 @@
   width: 20rem;
   margin: 5rem;
   padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   img {
     width: 100%;
   }

@@ -5,38 +5,25 @@ import { useDispatch } from "react-redux";
 import { addDownload } from "../../Redux/downloadSlice";
 import { useNavigate } from "react-router-dom";
 import { Options } from "got/dist/source";
-
-const dummyData: Game[] = [
-  {
-    name: "7 DAYS TO DIE ALPHA 20 B238 PC ESPAÑOL + ONLINE STEAM V2",
-    imgUrl:
-      "https://pivigames.blog/wp-content/uploads/2018/11/Descargar-7-Days-to-Die-Alpha-17-Full-PC-Espa%C3%B1ol-Gratis-min.jpg",
-    linkMediafire: [
-      "https://www.mediafire.com/file/mdh699yze0f2ara/7.Days.to.Die.A20.B238.7z/file",
-    ],
-  },
-  {
-    name: "BEAMNG DRIVE V0.24.1.1 PC + ONLINE STEAM",
-    imgUrl:
-      "https://pivigames.blog/wp-content/uploads/2017/04/BeamNG-drive-Free-Download.jpeg",
-    linkMediafire: [
-      "https://www.mediafire.com/file/cselc63645vnkz7/BeamNG.Drive.v0.24.1.1-0xdeadc0de.7z/file",
-    ],
-  },
-];
+import { dummyData } from "../../dummyData";
+import { GamePhase } from "../../Models/GamePhases";
+import { Memory } from "../../LocalStorage/Storage";
+import { clone } from "../../Utils/Cloner";
 
 export function Store() {
-  const [games, setGames] = useState(dummyData);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const onDownloadList = Memory.getOnDownloadListGames();
+  const onLibraryList = Memory.getOnLibraryListGames();
+  const [games, setGames] = useState<Game[]>(dummyData);
+  const [gamesOnDownload, setGamesOnDownload] = useState<string[]>(onDownloadList);
+  const [gamesOnLibrary, setGamesOnLibrary] = useState<string[]>(onLibraryList);
 
-  const onDownload = (name: string, links: string[]) => {
-    const gameObj = {
-      name,
-      links,
-    };
-    dispatch(addDownload(gameObj));
-    navigate("/download");
+  const onDownload = (name: string) => {
+    Memory.addGameToDownloads(name);
+    setGamesOnDownload((prev) => {
+      const clonedState = clone(prev);
+      clonedState.push(name);
+      return clonedState;
+    });
   };
 
   return (
@@ -49,9 +36,25 @@ export function Store() {
         justifyContent: "center",
       }}
     >
-      {games.map((game) => {
-        return <GameCard game={game} onDownload={onDownload} />;
-      })}
+      {games == [] ? (
+        <h1>Loading Games...</h1>
+      ) : (
+        games.map((game) => {
+          return (
+            <GameCard
+              game={game}
+              onDownload={onDownload}
+              gamePhase={
+                gamesOnDownload.includes(game.name)
+                  ? GamePhase.onDownload
+                  : gamesOnLibrary.includes(game.name)
+                  ? GamePhase.onLibrary
+                  : GamePhase.onStore
+              }
+            />
+          );
+        })
+      )}
     </div>
   );
 }

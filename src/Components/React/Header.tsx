@@ -5,7 +5,7 @@ import "../Sass/Header.scss";
 export function Header() {
   return (
     <div className="header">
-      <h1>Jiren Entertainment</h1>
+      <h1>Jiren Power</h1>
       <div id="links">
         <NavLink
           to="/"
@@ -21,7 +21,7 @@ export function Header() {
             isActive ? "activeLink link" : "idleLink link"
           }
         >
-          Download
+          Downloads
         </NavLink>
         <NavLink
           to="/library"

@@ -1,7 +1,8 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
+const { downloadProcess, uncompressZip } = require("./coreProcess.js");
 
 const createWindow = () => {
   // Create the browser window.
@@ -45,10 +46,10 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+ipcMain.on("download", function (event, link) {
+  downloadProcess(link).then(() => {
+    console.log("Download Process Finished.");
+  });
+});
 
-// to access anything in here use window.require('electron').remote
-
-// main process, for example app/main.js
-exports.test = () => console.log("Yay");
+ipcMain.on("uncompress", function (event, dest) {});
