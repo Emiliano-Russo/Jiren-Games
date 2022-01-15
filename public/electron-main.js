@@ -2,7 +2,21 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
-const { downloadProcess, uncompressZip } = require("./coreProcess.js");
+const { download, uncompressZip } = require("./coreProcess.js");
+const fs = require("fs");
+const os = require("os");
+const username = os.userInfo().username;
+
+const dir = "C:/Users/" + username + "/Documents/JirenGames";
+if (fs.existsSync(dir)) {
+  console.log("Directory exists!");
+} else {
+  console.log("Directory not found.");
+  fs.mkdirSync(dir, (err) => {
+    console.log("**ERROR**");
+    console.log(err);
+  });
+}
 
 const createWindow = () => {
   // Create the browser window.
@@ -27,7 +41,6 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
   createWindow();
-
   app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
@@ -42,12 +55,11 @@ app.on("window-all-closed", () => {
   // if (process.platform !== "darwin") app.quit();
 });
 
-ipcMain.on("download", function (event, game) {
-  /*downloadProcess(link).then(() => {
-    console.log("Download Process Finished.");
-  });*/
-  console.log("Download Starts with:");
-  console.log(game);
+ipcMain.on("download", async function (event, game) {
+  download(event, game);
+  /*setTimeout(() => {
+    event.sender.send("download-ready");
+  }, 5000);*/
 });
 
 ipcMain.on("uncompress", function (event, dest) {});

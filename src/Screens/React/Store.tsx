@@ -30,7 +30,15 @@ export function Store() {
         <h1>Loading Games...</h1>
       ) : (
         games.map((game) => {
-          return <GameCard title={game.title} imgUrl={game.imgUrl} btnLabel="Download" onBtnClick={onDownload} />;
+          return (
+            <GameCard
+              key={game.title}
+              title={game.title}
+              imgUrl={game.imgUrl}
+              btnLabel="Download"
+              onBtnClick={onDownload}
+            />
+          );
         })
       )}
     </div>

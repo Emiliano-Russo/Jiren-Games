@@ -4,11 +4,28 @@ import { RootState } from "../../Redux/store";
 import { Memory } from "../../Storage/GamePhases";
 import { GameCard } from "../../Components/React/GameCard";
 import { FireStoreController } from "../../Storage/FireStoreController";
+import { Game } from "../../Models/Game";
+import "../Sass/Downloads.scss";
+import { clone } from "../../Utils/Cloner";
 
 const { ipcRenderer } = window.require("electron");
 
 export function Downloads() {
   const [gameList, setGameList] = useState(Memory.getOnDownloadListGames());
+  const [downloadingGame, setDownloadingGame] = useState<string | undefined>(undefined);
+
+  function onDownloadReady(event: any, arg: any) {
+    console.log("Download Ready!!");
+    setDownloadingGame(undefined);
+  }
+
+  useEffect(() => {
+    console.log("UseEffect");
+    ipcRenderer.on("download-ready", onDownloadReady);
+    return () => {
+      ipcRenderer.removeListener("download-ready", onDownloadReady);
+    };
+  }, []);
 
   const onRemove = (name: string) => {
     Memory.removeGameFromDownloads(name);
@@ -16,15 +33,26 @@ export function Downloads() {
   };
 
   const onStartDownload = (title: string) => {
+    setDownloadingGame(title);
+    setGameList((prev) => {
+      const clonedGameList = clone(prev);
+      const index = clonedGameList.indexOf(title);
+      if (index > -1) {
+        clonedGameList.splice(index, 1);
+      }
+      return clonedGameList;
+    });
     ipcRenderer.send("download", FireStoreController.Instance.getGame(title));
   };
 
   return (
-    <div>
-      <div className="queue">
+    <div className="downloads">
+      <div id="#style-6" className="queue">
+        <h1>Queue</h1>
         {gameList.map((title) => {
           return (
             <GameCard
+              key={title}
               btnLabel="Start Download"
               onClose={onRemove}
               onBtnClick={onStartDownload}
@@ -38,7 +66,11 @@ export function Downloads() {
           );
         })}
       </div>
-      <div className="onGoing"></div>
+      <div className="downloading">
+        <h1>Downloading</h1>
+        <p>{downloadingGame ? downloadingGame : null}</p>
+        {downloadingGame ? <div className="spinner"></div> : null}
+      </div>
     </div>
   );
 }
