@@ -16,11 +16,7 @@ const createWindow = () => {
   });
 
   // load the index.html of the app. (or localhost on port 3000 if you're in development)
-  mainWindow.loadURL(
-    isDev
-      ? "http://localhost:3000"
-      : `file://${path.join(__dirname, "../build/index.html")}`
-  );
+  mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`);
 
   // Open the DevTools. will only work if webPreferences::devTools is true
   mainWindow.webContents.openDevTools();
@@ -43,13 +39,15 @@ app.on("ready", () => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
+  // if (process.platform !== "darwin") app.quit();
 });
 
-ipcMain.on("download", function (event, link) {
-  downloadProcess(link).then(() => {
+ipcMain.on("download", function (event, game) {
+  /*downloadProcess(link).then(() => {
     console.log("Download Process Finished.");
-  });
+  });*/
+  console.log("Download Starts with:");
+  console.log(game);
 });
 
 ipcMain.on("uncompress", function (event, dest) {});

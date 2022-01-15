@@ -1,8 +1,9 @@
 export interface Game {
-  name: string;
+  title: string;
   imgUrl: string;
-  linkMediafire: string[];
-  description?: string;
-  totalSize?: string;
-  linkCrack?: string;
+  downloadLinks: string[];
+  description: string;
+  totalSize: string;
+  crackUrl?: string;
+  youtubeTrailerUrl: string;
 }

@@ -1,32 +1,27 @@
 import React from "react";
-import { Game } from "../../Models/Game";
-import { GamePhase } from "../../Models/GamePhases";
 import "../Sass/GameCard.scss";
 
 interface props {
-  game: Game;
-  onDownload: (name: string, links: string[]) => void;
-  gamePhase: GamePhase;
+  title: string;
+  imgUrl: string;
+  onBtnClick: (name: string) => void;
+  onClose?: (name: string) => void;
+  btnLabel: string;
 }
 
 export const GameCard = (props: props) => {
   return (
     <div className="gameCard">
-      <img src={props.game.imgUrl} />
-      <h2>{props.game.name}</h2>
-      {props.gamePhase === GamePhase.onStore ? (
-        <button
-          onClick={() =>
-            props.onDownload(props.game.name, props.game.linkMediafire)
-          }
-        >
-          Add to Downloads
+      {props.onClose ? (
+        <button className="closeBtn" onClick={() => (props.onClose ? props.onClose(props.title) : null)}>
+          X
         </button>
-      ) : props.gamePhase === GamePhase.onDownload ? (
-        <p style={{ color: "royalblue" }}>On Downloads</p>
-      ) : (
-        <p style={{ color: "green" }}>On Library</p>
-      )}
+      ) : null}
+      <img src={props.imgUrl} />
+      <h2>{props.title}</h2>
+      <button id="mainBtn" onClick={() => props.onBtnClick(props.title)}>
+        {props.btnLabel}
+      </button>
     </div>
   );
 };

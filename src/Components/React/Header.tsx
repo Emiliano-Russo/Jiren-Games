@@ -5,30 +5,15 @@ import "../Sass/Header.scss";
 export function Header() {
   return (
     <div className="header">
-      <h1>Jiren Power</h1>
+      <h1>Jiren Entertainment</h1>
       <div id="links">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "activeLink link" : "idleLink link"
-          }
-        >
+        <NavLink to="/" className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}>
           Store
         </NavLink>
-        <NavLink
-          to="/download"
-          className={({ isActive }) =>
-            isActive ? "activeLink link" : "idleLink link"
-          }
-        >
+        <NavLink to="/download" className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}>
           Downloads
         </NavLink>
-        <NavLink
-          to="/library"
-          className={({ isActive }) =>
-            isActive ? "activeLink link" : "idleLink link"
-          }
-        >
+        <NavLink to="/library" className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}>
           Library
         </NavLink>
       </div>

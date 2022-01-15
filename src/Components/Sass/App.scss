@@ -8,7 +8,8 @@ $color-d: #30475e;
   text-align: center;
   background-color: $color-a;
   color: $color-b;
-  height: 100vh;
+  min-height: 100vh;
+  height: max-content;
 }
 
 body {

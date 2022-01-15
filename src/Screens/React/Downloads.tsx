@@ -1,29 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
+import { Memory } from "../../Storage/GamePhases";
+import { GameCard } from "../../Components/React/GameCard";
+import { FireStoreController } from "../../Storage/FireStoreController";
 
 const { ipcRenderer } = window.require("electron");
 
 export function Downloads() {
-  const [link, setLink] = useState("");
+  const [gameList, setGameList] = useState(Memory.getOnDownloadListGames());
 
-  const gamesToDownload = useSelector(
-    (state: RootState) => state.download.gamesToDownload
-  );
+  const onRemove = (name: string) => {
+    Memory.removeGameFromDownloads(name);
+    setGameList(Memory.getOnDownloadListGames());
+  };
 
-  const linkWeb =
-    "https://www.mediafire.com/file/zv5gcspnn39hrjs/ejemplo.zip/file";
+  const onStartDownload = (title: string) => {
+    ipcRenderer.send("download", FireStoreController.Instance.getGame(title));
+  };
 
   return (
     <div>
-      <h1>Games to download</h1>
-      {gamesToDownload.map((toDownloadGame) => {
-        return <h3>{toDownloadGame.name}</h3>;
-      })}
+      <div className="queue">
+        {gameList.map((title) => {
+          return (
+            <GameCard
+              btnLabel="Start Download"
+              onClose={onRemove}
+              onBtnClick={onStartDownload}
+              title={title}
+              imgUrl={
+                FireStoreController.Instance.getGame(title) && FireStoreController.Instance.getGame(title)?.imgUrl
+                  ? FireStoreController.Instance.getGame(title)?.imgUrl
+                  : "https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg"
+              }
+            />
+          );
+        })}
+      </div>
+      <div className="onGoing"></div>
     </div>
   );
 }
-
-//<button onClick={() => ipcRenderer.send("download", linkWeb)}>
-//Comminucate nodejs
-//</button>
