@@ -4,28 +4,48 @@ const StreamZip = require("node-stream-zip");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const axios = require("axios");
+const { getOutputFileNames } = require("typescript");
+const os = require("os");
+const username = os.userInfo().username;
 
-const dest = "C:/Users/emili/Downloads/JirenGames/Archivo.zip";
+const folderDest = "C:/Users/" + username + "/Documents/JirenGames";
 
 module.exports.download = async function download(event, game) {
+  console.log("Creating Folder...");
+  fs.mkdirSync(folderDest + "/" + game.title, (err) => {
+    console.log("**ERROR**");
+    console.log(err);
+  });
   console.log("Starting Download...");
   const links = game.downloadLinks;
   for (link of links) {
     console.log("Downloading link: " + link);
-    const result = await downloadProcess(link);
+    const result = await downloadProcess(link, game.title);
     console.log("passing result");
   }
   event.sender.send("download-ready");
 };
 
-function downloadProcess(linkWeb) {
+function downloadProcess(linkWeb, folderName) {
   return new Promise(async function (resolve, reject) {
     console.log("Fetching: ..." + linkWeb);
     const link = await fetchMediafireDownloadLink(linkWeb);
+    const fileName = await fetchFileName(linkWeb);
     console.log("Downloading...");
-    const result = await download(link, dest);
+    const finalDest = folderDest + "/" + folderName + "/" + fileName;
+    console.log("final dest: " + finalDest);
+    const result = await download(link, finalDest);
     console.log("Download finished");
     resolve();
+  });
+}
+
+function fetchFileName(mediafireLink) {
+  return new Promise(async function (resolve, reject) {
+    const resp = await axios.default.get(mediafireLink);
+    const dom = new jsdom.JSDOM(resp.data);
+    const elements = dom.window.document.getElementsByClassName("dl-btn-label");
+    resolve(elements[0].title);
   });
 }
 
