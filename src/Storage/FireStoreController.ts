@@ -24,7 +24,7 @@ export class FireStoreController {
 
 const mockData: Game[] = [
   {
-    title: "FARM TOGETHER PC ESPAÑOL CHIKPEA+ ONLINE STEAM V2",
+    title: "FARM TOGETHER PC ESPAÑOL CHIKPEA+ ONLINE STEAM V2 (600mb)",
     imgUrl: "https://pivigames.blog/wp-content/uploads/2019/07/Descargar-Farm-together-PC-Espa%C3%B1ol-Gratis.jpg",
     downloadLinks: ["https://www.mediafire.com/file/woe4ls041au851e/F4rmTo.v14.01.2022.rar/file"],
     crackUrl: "https://racaty.net/wovyh6n3s1lu",
@@ -47,7 +47,7 @@ const mockData: Game[] = [
     youtubeTrailerUrl: "https://youtu.be/koqnislFtMA",
   },
   {
-    title: "7 DAYS TO DIE ALPHA 20 B238 PC ESPAÑOL + ONLINE STEAM V2",
+    title: "7 DAYS TO DIE ALPHA 20 B238 PC ESPAÑOL + ONLINE STEAM V2 (7.1GB)",
     imgUrl:
       "https://pivigames.blog/wp-content/uploads/2018/11/Descargar-7-Days-to-Die-Alpha-17-Full-PC-Espa%C3%B1ol-Gratis-min.jpg",
     downloadLinks: ["https://www.mediafire.com/file/mdh699yze0f2ara/7.Days.to.Die.A20.B238.7z/file"],
@@ -58,7 +58,7 @@ const mockData: Game[] = [
     youtubeTrailerUrl: "https://youtu.be/TCI12fe2s3I",
   },
   {
-    title: "Ejemplo 150mb",
+    title: "Ejemplo150mb",
     imgUrl: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg",
     downloadLinks: ["https://www.mediafire.com/file/zv5gcspnn39hrjs/ejemplo.zip/file"],
     description: "Esto es un ejemplo",

@@ -2,7 +2,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
-const { download, uncompressZip } = require("./coreProcess.js");
+const { download, unCompress } = require("./coreProcess.cjs");
 const fs = require("fs");
 const os = require("os");
 const username = os.userInfo().username;
@@ -62,4 +62,9 @@ ipcMain.on("download", async function (event, game) {
   }, 5000);*/
 });
 
-ipcMain.on("uncompress", function (event, dest) {});
+ipcMain.on("uncompress", function (event, dest) {
+  unCompress(
+    "C:/Users/emili/Documents/JirenGames/Ejemplo150mb/algo",
+    "C:/Users/emili/Documents/JirenGames/Ejemplo150mb/algoFolder"
+  );
+});
