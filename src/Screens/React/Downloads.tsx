@@ -12,18 +12,26 @@ const { ipcRenderer } = window.require("electron");
 
 export function Downloads() {
   const [gameList, setGameList] = useState(Memory.getOnDownloadListGames());
-  const [downloadingGame, setDownloadingGame] = useState<string | undefined>(undefined);
+  const [downloadingGameName, setDownloadingGameName] = useState<string | undefined>(undefined);
+  const [feedBack, setFeedBack] = useState<string>("");
 
   function onDownloadReady(event: any, arg: any) {
     console.log("Download Ready!!");
-    setDownloadingGame(undefined);
+    setDownloadingGameName(undefined);
+    setFeedBack("");
+  }
+
+  function progressDownload(event?: any, arg?: any) {
+    setFeedBack(arg);
   }
 
   useEffect(() => {
     console.log("UseEffect");
     ipcRenderer.on("download-ready", onDownloadReady);
+    ipcRenderer.on("feedBack", progressDownload);
     return () => {
       ipcRenderer.removeListener("download-ready", onDownloadReady);
+      ipcRenderer.removeListener("feedBack", progressDownload);
     };
   }, []);
 
@@ -33,7 +41,7 @@ export function Downloads() {
   };
 
   const onStartDownload = (title: string) => {
-    setDownloadingGame(title);
+    setDownloadingGameName(title);
     setGameList((prev) => {
       const clonedGameList = clone(prev);
       const index = clonedGameList.indexOf(title);
@@ -67,9 +75,9 @@ export function Downloads() {
         })}
       </div>
       <div className="downloading">
-        <h1>Downloading</h1>
-        <p>{downloadingGame ? downloadingGame : null}</p>
-        {downloadingGame ? <div className="spinner"></div> : null}
+        <p>{downloadingGameName ? downloadingGameName : null}</p>
+        {feedBack}
+        {downloadingGameName ? <div className="spinner"></div> : null}
       </div>
     </div>
   );
