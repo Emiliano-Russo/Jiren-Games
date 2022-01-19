@@ -2,10 +2,13 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
-const { download, unCompress } = require("./coreProcess.cjs");
+const { download, unCompress } = require("./gameManipulation/installationCycle/main.cjs");
 const fs = require("fs");
 const os = require("os");
 const username = os.userInfo().username;
+const { playGame } = require("./gameManipulation/gameStarter.cjs");
+const { deleteGame } = require("./gameManipulation/gameDelete.cjs");
+const { getInstalledGames } = require("./gameManipulation/libraryRefresh.cjs");
 
 const dir = "C:/Users/" + username + "/Documents/JirenGames";
 if (fs.existsSync(dir)) {
@@ -67,4 +70,17 @@ ipcMain.on("uncompress", function (event, dest) {
     "C:/Users/emili/Documents/JirenGames/Ejemplo150mb/algo",
     "C:/Users/emili/Documents/JirenGames/Ejemplo150mb/algoFolder"
   );
+});
+
+ipcMain.on("get-installed-games", function (event, arg) {
+  const gameList = getInstalledGames(dir);
+  event.sender.send("get-installed-games", gameList);
+});
+
+ipcMain.on("play-game", function (event, gameName) {
+  playGame(gameName, dir);
+});
+
+ipcMain.on("delete-game", function (event, gameName) {
+  deleteGame(gameName, dir);
 });

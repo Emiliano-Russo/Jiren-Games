@@ -47,17 +47,6 @@ const mockData: Game[] = [
     youtubeTrailerUrl: "https://youtu.be/koqnislFtMA",
   },
   {
-    title: "7 DAYS TO DIE ALPHA 20 B238 PC ESPAÑOL + ONLINE STEAM V2 (7.1GB)",
-    imgUrl:
-      "https://pivigames.blog/wp-content/uploads/2018/11/Descargar-7-Days-to-Die-Alpha-17-Full-PC-Espa%C3%B1ol-Gratis-min.jpg",
-    downloadLinks: ["https://www.mediafire.com/file/mdh699yze0f2ara/7.Days.to.Die.A20.B238.7z/file"],
-    crackUrl: "https://racaty.net/8amb0l3cgkdi",
-    description:
-      "Descargar Days To Die Alpha 20 para PC en Español el juego comienza en un contexto postapocalíptico en el que el mundo tal y como lo conocemos ha sido arrasado en una hipotética III Guerra Mundial. ",
-    totalSize: "7.1 GB",
-    youtubeTrailerUrl: "https://youtu.be/TCI12fe2s3I",
-  },
-  {
     title: "Ejemplo150mb",
     imgUrl: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg",
     downloadLinks: ["https://www.mediafire.com/file/zv5gcspnn39hrjs/ejemplo.zip/file"],
@@ -78,5 +67,23 @@ const mockData: Game[] = [
       "¡Empieza desde cero, con un pequeño huerto, y termina con una impresionante granja que se extiende más alla de donde alcanza la vista!",
     totalSize: "600 MB",
     youtubeTrailerUrl: "https://www.youtube.com/watch?v=SNSJWo_gKNo",
+  },
+  {
+    title: "STRANDED DEEP PC ESPAÑOL V0.90.11 + ONLINE STEAM (1.5GB)",
+    description:
+      "Cuando acabe la introducción de la partida habrás naufragado en una minúscula isla desierta: tu nuevo hogar. “Esto es como The Forest pero en el mar”, quizás estés pensando. ",
+    downloadLinks: ["https://www.mediafire.com/file/3q3db74oviufnpu/Stranded.Deep.v0.90.11.zip/file"],
+    imgUrl: "https://pivigames.blog/wp-content/uploads/2021/02/Stranded-Deep-Juego-PiviGames.jpg",
+    totalSize: "1.5 GB",
+    youtubeTrailerUrl: "https://youtu.be/qawXmda9ebY",
+  },
+  {
+    title: "BEAMNG DRIVE V0.24.1.1 PC + ONLINE STEAM",
+    description:
+      " es un juego de simulador de coches que se encuentra en fase de Acceso Anticipado. La versión completa promete miles de misiones y explorar mundos abiertos con tu vehículo. La versión actual es prácticamente un SAW para coches.",
+    downloadLinks: ["https://www.mediafire.com/file/cselc63645vnkz7/BeamNG.Drive.v0.24.1.1-0xdeadc0de.7z/file"],
+    imgUrl: "https://pivigames.blog/wp-content/uploads/2017/04/BeamNG-drive-Free-Download.jpeg",
+    totalSize: "7 GB",
+    youtubeTrailerUrl: "https://youtu.be/7vGYVUCmxeI",
   },
 ];

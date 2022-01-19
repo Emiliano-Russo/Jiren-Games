@@ -40,26 +40,14 @@ class Storage {
     this.addGameToPhase(gameName, "gamesOnDownload");
   }
 
-  addGameToLibrary(gameName: string) {
-    this.addGameToPhase(gameName, "gamesOnLibrary");
-  }
-
   removeGameFromDownloads(name: string) {
+    console.log("Removing: " + name);
     this.removeGameFromPhase(name, "gamesOnDownload");
-  }
-
-  removeGameFromLibrary(name: string) {
-    this.removeGameFromPhase(name, "gamesOnLibrary");
   }
 
   getOnDownloadListGames(): string[] {
     this.checkLocalSotrage("gamesOnDownload");
     return this.getValueLocalStorage("gamesOnDownload");
-  }
-
-  getOnLibraryListGames(): string[] {
-    this.checkLocalSotrage("gamesOnLibrary");
-    return this.getValueLocalStorage("gamesOnLibrary");
   }
 }
 

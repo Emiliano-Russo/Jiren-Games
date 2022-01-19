@@ -12,12 +12,14 @@ const { ipcRenderer } = window.require("electron");
 
 export function Downloads() {
   const [gameList, setGameList] = useState(Memory.getOnDownloadListGames());
-  const [downloadingGameName, setDownloadingGameName] = useState<string | undefined>(undefined);
+  const [downloadingGameName, setDownloadingGameName] = useState<string>("");
   const [feedBack, setFeedBack] = useState<string>("");
 
   function onDownloadReady(event: any, arg: any) {
     console.log("Download Ready!!");
-    setDownloadingGameName(undefined);
+    console.log("Game to remove: " + arg);
+    Memory.removeGameFromDownloads(arg);
+    setDownloadingGameName("");
     setFeedBack("");
   }
 
@@ -75,9 +77,9 @@ export function Downloads() {
         })}
       </div>
       <div className="downloading">
-        <p>{downloadingGameName ? downloadingGameName : null}</p>
+        <p>{downloadingGameName}</p>
         {feedBack}
-        {downloadingGameName ? <div className="spinner"></div> : null}
+        {downloadingGameName != "" ? <div className="spinner"></div> : null}
       </div>
     </div>
   );

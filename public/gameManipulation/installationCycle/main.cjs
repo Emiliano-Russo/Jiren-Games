@@ -1,9 +1,9 @@
 const fs = require("fs");
 const os = require("os");
 const username = os.userInfo().username;
-const { unCompress } = require("./installationCycle/unCompress.cjs");
-const { fetchLink } = require("./installationCycle/fetchLink.cjs");
-const { downloadGame } = require("./installationCycle/download.cjs");
+const { unCompress } = require("./unCompress.cjs");
+const { fetchLink } = require("./fetchLink.cjs");
+const { downloadGame } = require("./download.cjs");
 
 const folderDest = "C:/Users/" + username + "/Documents/JirenGames";
 
@@ -17,7 +17,7 @@ module.exports.download = async function download(event, game) {
     const result = await downloadProcess(link, game.title, event);
   }
   console.log("Process Ready!");
-  event.sender.send("download-ready");
+  event.sender.send("download-ready", game.title);
 };
 
 function createFolder(dest) {
