@@ -2,19 +2,16 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
-const { download, unCompress } = require("./gameManipulation/installationCycle/main.cjs");
+const { beginInstallationCycle } = require("./gameManipulation/installationCycle/main.cjs");
 const fs = require("fs");
 const os = require("os");
 const username = os.userInfo().username;
 const { playGame } = require("./gameManipulation/gameStarter.cjs");
-const { deleteGame } = require("./gameManipulation/gameDelete.cjs");
-const { getInstalledGames } = require("./gameManipulation/libraryRefresh.cjs");
+const { deleteGame } = require("./gameManipulation/gameRemover.cjs");
+const { getInstalledGames } = require("./gameManipulation/gameFinder.cjs");
 
 const dir = "C:/Users/" + username + "/Documents/JirenGames";
-if (fs.existsSync(dir)) {
-  console.log("Directory exists!");
-} else {
-  console.log("Directory not found.");
+if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, (err) => {
     console.log("**ERROR**");
     console.log(err);
@@ -59,17 +56,7 @@ app.on("window-all-closed", () => {
 });
 
 ipcMain.on("download", async function (event, game) {
-  download(event, game);
-  /*setTimeout(() => {
-    event.sender.send("download-ready");
-  }, 5000);*/
-});
-
-ipcMain.on("uncompress", function (event, dest) {
-  unCompress(
-    "C:/Users/emili/Documents/JirenGames/Ejemplo150mb/algo",
-    "C:/Users/emili/Documents/JirenGames/Ejemplo150mb/algoFolder"
-  );
+  beginInstallationCycle(event, game);
 });
 
 ipcMain.on("get-installed-games", function (event, arg) {

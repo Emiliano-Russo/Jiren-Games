@@ -11,7 +11,7 @@ module.exports.downloadGame = function download(url, dest, event) {
           downloadProgress(response, event);
         })
         .on("error", function (err) {
-          console.log("#error");
+          console.log("error");
           console.log(err);
           // Handle errors
           fs.unlink(dest); // Delete the file async. (But we don't check the result)

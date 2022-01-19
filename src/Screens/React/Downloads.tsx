@@ -16,8 +16,6 @@ export function Downloads() {
   const [feedBack, setFeedBack] = useState<string>("");
 
   function onDownloadReady(event: any, arg: any) {
-    console.log("Download Ready!!");
-    console.log("Game to remove: " + arg);
     Memory.removeGameFromDownloads(arg);
     setDownloadingGameName("");
     setFeedBack("");
@@ -28,7 +26,6 @@ export function Downloads() {
   }
 
   useEffect(() => {
-    console.log("UseEffect");
     ipcRenderer.on("download-ready", onDownloadReady);
     ipcRenderer.on("feedBack", progressDownload);
     return () => {

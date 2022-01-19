@@ -27,7 +27,7 @@ const mockData: Game[] = [
     title: "FARM TOGETHER PC ESPAÑOL CHIKPEA+ ONLINE STEAM V2 (600mb)",
     imgUrl: "https://pivigames.blog/wp-content/uploads/2019/07/Descargar-Farm-together-PC-Espa%C3%B1ol-Gratis.jpg",
     downloadLinks: ["https://www.mediafire.com/file/woe4ls041au851e/F4rmTo.v14.01.2022.rar/file"],
-    crackUrl: "https://racaty.net/wovyh6n3s1lu",
+    crackUrl: "https://srv10.racaty.net:183/d/rqfowfca6xjz7x5inkkilysnykcy4x5mvfbtp2dzgpzk543keq7jgepgtb7l5teyg6wmmjqf/FtoFixOnly.rar",
     description:
       "¡Empieza desde cero, con un pequeño huerto, y termina con una impresionante granja que se extiende más alla de donde alcanza la vista!",
     totalSize: "600 MB",
