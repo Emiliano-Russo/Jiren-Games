@@ -27,7 +27,7 @@ const mockData: Game[] = [
     title: "FARM TOGETHER PC ESPAÑOL CHIKPEA+ ONLINE STEAM V2 (600mb)",
     imgUrl: "https://pivigames.blog/wp-content/uploads/2019/07/Descargar-Farm-together-PC-Espa%C3%B1ol-Gratis.jpg",
     downloadLinks: ["https://www.mediafire.com/file/woe4ls041au851e/F4rmTo.v14.01.2022.rar/file"],
-    crackUrl: "https://srv10.racaty.net:183/d/rqfowfca6xjz7x5inkkilysnykcy4x5mvfbtp2dzgpzk543keq7jgepgtb7l5teyg6wmmjqf/FtoFixOnly.rar",
+    crackUrl: "https://www.mediafire.com/file/rqykzbt3iymrg0n/FtoFixOnly.rar/file",
     description:
       "¡Empieza desde cero, con un pequeño huerto, y termina con una impresionante granja que se extiende más alla de donde alcanza la vista!",
     totalSize: "600 MB",
@@ -72,7 +72,7 @@ const mockData: Game[] = [
     title: "STRANDED DEEP PC ESPAÑOL V0.90.11 + ONLINE STEAM (1.5GB)",
     description:
       "Cuando acabe la introducción de la partida habrás naufragado en una minúscula isla desierta: tu nuevo hogar. “Esto es como The Forest pero en el mar”, quizás estés pensando. ",
-    downloadLinks: ["https://www.mediafire.com/file/3q3db74oviufnpu/Stranded.Deep.v0.90.11.zip/file"],
+    downloadLinks: ["https://www.mediafire.com/file/kostaybscqe628f/Stranded.Deep.Build.28092021-0xdeadc0de.rar/file"],
     imgUrl: "https://pivigames.blog/wp-content/uploads/2021/02/Stranded-Deep-Juego-PiviGames.jpg",
     totalSize: "1.5 GB",
     youtubeTrailerUrl: "https://youtu.be/qawXmda9ebY",
@@ -85,5 +85,33 @@ const mockData: Game[] = [
     imgUrl: "https://pivigames.blog/wp-content/uploads/2017/04/BeamNG-drive-Free-Download.jpeg",
     totalSize: "7 GB",
     youtubeTrailerUrl: "https://youtu.be/7vGYVUCmxeI",
+  },
+  {
+    title: "PHASMOPHOBIA PC ESPAÑOL V0.5.1.1 + ONLINE STEAM V5",
+    description:
+      "Descargar Phasmophobia PC Español es un juego de horror psicológico  cooperativo en línea para 4 jugadores. La actividad paranormal va en aumento y depende de ti y de tu equipo utilizar todo el equipo de caza de fantasmas a tu disposición para reunir la mayor cantidad de evidencia posible.",
+    downloadLinks: ["https://www.mediafire.com/file/wn7b60oq9ludpww/Phasmophobia.v0.5.1.1-0xdeadc0de.zip/file"],
+    imgUrl: "https://pivigames.blog/wp-content/uploads/2021/12/Phasmophobia-Ultima-Version-PiviGames.jpg",
+    totalSize: "7GB",
+    youtubeTrailerUrl: "https://youtu.be/cLyTZ5tvIWQ",
+    crackUrl: "https://www.mediafire.com/file/s59mqt4f948qb4p/cracksito.rar/file",
+  },
+  {
+    title: "HFF PC ESPAÑOL V1080242 ONLINE STEAM",
+    description:
+      "Descargar Human Fall Flat para PC en Español es un estrafalario juego abierto de exploración y rompecabezas basado en la física y ambientado en flotantes paisajes oníricos.",
+    downloadLinks: ["https://www.mediafire.com/file/kr0v9b89u6x2eo8/HFF-1080242.rar/file"],
+    imgUrl: "https://pivigames.blog/wp-content/uploads/2021/02/Human-Fall-Flat-Forest-PiviGames.jpg",
+    totalSize: "1.14GB",
+    youtubeTrailerUrl: "https://youtu.be/-Edk59BqSEU",
+  },
+  {
+    title: "GANG BEASTS PARA PC EN SPAÑOL",
+    description: "asda",
+    downloadLinks: ["https://www.mediafire.com/file/oxa0myefpo7gzmb/G4ngB.v1.18.195.rar/file"],
+    imgUrl: "https://pivigames.blog/wp-content/uploads/2020/04/Gang-Beasts-PiviGames-2020.jpg",
+    totalSize: "630 MB",
+    youtubeTrailerUrl: "https://youtu.be/UQdkkmP7amI",
+    crackUrl: "https://www.mediafire.com/file/z5br05c7a7nfc22/G4ngV3.rar/file",
   },
 ];

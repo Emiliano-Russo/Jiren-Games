@@ -3,17 +3,23 @@ const os = require("os");
 const username = os.userInfo().username;
 const { unCompress } = require("./uncompressor.cjs");
 const { fetchLink } = require("./linkCollector.cjs");
-const { downloadGame } = require("./downloader.cjs");
+const { downloadFile } = require("./downloader.cjs");
 const { crackGame } = require("./gameCracker.cjs");
+const { getFileName, createFolder } = require("./helper.cjs");
 
 const jirenGamesFolder = "C:/Users/" + username + "/Documents/JirenGames";
 
 module.exports.beginInstallationCycle = async function beginInstallationCycle(event, game) {
+  console.log("creating game folder...");
   createFolder(jirenGamesFolder + "/" + game.title);
+  console.log("downloading all links...");
   const listLocationCompressedFiles = await downloadAllLinks(game.downloadLinks, game.title, event);
   const gameLocation = `${jirenGamesFolder}/${game.title}/Uncompress`;
+  console.log("uncompressing...");
   const res = await unCompressAllFiles(listLocationCompressedFiles, gameLocation, event);
-  if (game.crackUrl) crackGame(game.crackUrl, gameLocation, event);
+  if (game.crackUrl) {
+    const r = await crackGame(game.crackUrl, gameLocation, event);
+  }
   event.sender.send("download-ready", game.title);
 };
 
@@ -39,24 +45,13 @@ async function unCompressAllFiles(listLocationCompressedFiles, destiny, event) {
   });
 }
 
-function createFolder(dest) {
-  if (!fs.existsSync(dest)) fs.mkdirSync(dest, () => {});
-}
-
 function downloadProcess(linkWeb, folderName, event) {
   return new Promise(async function (resolve, reject) {
     event.sender.send("feedBack", "Preparing Download...");
     const link = await fetchLink(linkWeb);
     const fileName = getFileName(linkWeb);
     const finalDest = `${jirenGamesFolder}/${folderName}/${fileName}`;
-    const result = await downloadGame(link, finalDest, event);
+    const result = await downloadFile(link, finalDest, event);
     resolve(finalDest);
   });
-}
-
-function getFileName(linkWeb) {
-  const penultinate = linkWeb.lastIndexOf("/", linkWeb.lastIndexOf("/") - 1);
-  const last = linkWeb.lastIndexOf("/");
-  const name = linkWeb.slice(penultinate + 1, last);
-  return name;
 }

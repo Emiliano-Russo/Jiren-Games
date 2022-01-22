@@ -1,6 +1,7 @@
 const StreamZip = require("node-stream-zip");
 const fs = require("fs");
 const unrar = require("unrar-promise");
+const { detectCompressionType, createFolder } = require("./helper.cjs");
 
 module.exports.unCompress = function unCompress(location, dest) {
   return new Promise(async function (resolve, reject) {
@@ -38,14 +39,4 @@ function uncompressZip(zipLocation, folderDest) {
 
 function unCompressRar(rarLocation, dest) {
   return unrar.unrar(rarLocation, dest);
-}
-
-function detectCompressionType(url) {
-  if (url.includes(".rar")) return "rar";
-  if (url.includes(".zip")) return "zip";
-  return "other";
-}
-
-function createFolder(dest) {
-  if (!fs.existsSync(dest)) fs.mkdirSync(dest, () => {});
 }

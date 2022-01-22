@@ -1,30 +1,24 @@
 const fs = require("fs");
 const https = require("https");
 
-module.exports.downloadGame = function download(url, dest, event) {
+module.exports.downloadFile = function download(url, dest, event) {
   return new Promise(async function (resolve, reject) {
-    try {
-      var file = fs.createWriteStream(dest);
-      var request = https
-        .get(url, function (response) {
-          response.pipe(file);
-          downloadProgress(response, event);
-        })
-        .on("error", function (err) {
-          console.log("error");
-          console.log(err);
-          // Handle errors
-          fs.unlink(dest); // Delete the file async. (But we don't check the result)
-          reject(err.message);
-        });
-      file.on("finish", () => {
-        resolve();
+    var file = fs.createWriteStream(dest);
+    var request = https
+      .get(url, function (response) {
+        response.pipe(file);
+        downloadProgress(response, event);
+      })
+      .on("error", function (err) {
+        console.log("error");
+        console.log(err);
+        // Handle errors
+        fs.unlink(dest); // Delete the file async. (But we don't check the result)
+        reject(err.message);
       });
-    } catch (err) {
-      console.log("ERROR: ");
-      console.log(err);
-      reject(err);
-    }
+    file.on("finish", () => {
+      resolve();
+    });
   });
 };
 

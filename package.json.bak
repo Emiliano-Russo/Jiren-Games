@@ -62,6 +62,6 @@
   "main": "public/electron-main.cjs",
   "homepage": "./",
   "devDependencies": {
- 
+    "jest": "^27.4.7"
   }
 }
