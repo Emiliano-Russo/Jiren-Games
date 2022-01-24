@@ -43,32 +43,30 @@ export function Downloads() {
     setDownloadingGameName(title);
     setGameList((prev) => {
       const clonedGameList = clone(prev);
-      const index = clonedGameList.indexOf(title);
+      //const index = clonedGameList.indexOf(title);
+      const index = clonedGameList.findIndex((game: Game) => game.title == title);
       if (index > -1) {
         clonedGameList.splice(index, 1);
       }
       return clonedGameList;
     });
-    ipcRenderer.send("download", FireStoreController.Instance.getGame(title));
+    const index = gameList.findIndex((game) => game.title == title);
+    ipcRenderer.send("download", gameList[index]);
   };
 
   return (
     <div className="downloads">
       <div id="#style-6" className="queue">
         <h1>Queue</h1>
-        {gameList.map((title) => {
+        {gameList.map((game) => {
           return (
             <GameCard
-              key={title}
+              key={game.title}
               btnLabel="Start Download"
               onClose={onRemove}
               onBtnClick={onStartDownload}
-              title={title}
-              imgUrl={
-                FireStoreController.Instance.getGame(title) && FireStoreController.Instance.getGame(title)?.imgUrl
-                  ? FireStoreController.Instance.getGame(title)?.imgUrl
-                  : "https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg"
-              }
+              title={game.title}
+              imgUrl={game.imgUrl ? game.imgUrl : "https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg"}
             />
           );
         })}

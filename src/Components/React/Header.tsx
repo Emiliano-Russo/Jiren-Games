@@ -5,7 +5,7 @@ import "../Sass/Header.scss";
 export function Header() {
   return (
     <div className="header">
-      <h1>Jiren Entertainment</h1>
+      <h1>Jiren Games</h1>
       <div id="links">
         <NavLink to="/" className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}>
           Store

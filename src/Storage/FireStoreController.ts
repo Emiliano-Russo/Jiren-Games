@@ -1,4 +1,10 @@
 import { Game } from "../Models/Game";
+import { db } from "../Firebase/FirebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { copySync } from "fs-extra";
+import { resolve } from "dns";
+
+const gamesRef = collection(db, "Games");
 
 export class FireStoreController {
   private static _instance: FireStoreController;
@@ -10,14 +16,31 @@ export class FireStoreController {
     return this._instance || (this._instance = new this());
   }
 
-  gameList: Game[] = [];
+  private gameList: Game[] = [];
 
-  fetchGames(amount: number, startAtIndex: number): Game[] {
-    return mockData.slice(startAtIndex, startAtIndex + amount);
+  async getAllGames(): Promise<any[]> {
+    return new Promise(async function (resolve, reject) {
+      const resList = await getDocs(collection(db, "Games"));
+      const list = resList.docs.map((value) => {
+        return value.data();
+      });
+      resolve(list);
+    });
   }
-  getGame(title: string): Game | undefined {
-    return mockData.find((game) => {
-      return game.title === title;
+
+  /*fetchGames(amount: number, startAtIndex: number): Game[] {
+    return mockData.slice(startAtIndex, startAtIndex + amount);
+  }*/
+  async getGame(title: string): Promise<any> {
+    return new Promise(async function (resolve, reject) {
+      const q = await query(gamesRef, where("title", "==", title));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        resolve(doc.data());
+      });
+      resolve(undefined);
     });
   }
 }
@@ -106,7 +129,7 @@ const mockData: Game[] = [
     youtubeTrailerUrl: "https://youtu.be/-Edk59BqSEU",
   },
   {
-    title: "GANG BEASTS PARA PC EN SPAÑOL",
+    title: "GANG BEASTS PARA PC ENSPAÑOL",
     description: "asda",
     downloadLinks: ["https://www.mediafire.com/file/oxa0myefpo7gzmb/G4ngB.v1.18.195.rar/file"],
     imgUrl: "https://pivigames.blog/wp-content/uploads/2020/04/Gang-Beasts-PiviGames-2020.jpg",

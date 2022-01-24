@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GameCard } from "../../Components/React/GameCard";
 import { Game } from "../../Models/Game";
 import { FireStoreController } from "../../Storage/FireStoreController";
+import { Memory } from "../../Storage/GamePhases";
 import { clone } from "../../Utils/Cloner";
 import "../Sass/Library.scss";
 
@@ -19,12 +20,13 @@ export function Library() {
   }, []);
 
   const onGettingInstalledGames = (event: any, gameNameList: string[]) => {
-    const arr: any[] = [];
-    gameNameList.map((name) => {
-      const game: Game | undefined = FireStoreController.Instance.getGame(name);
-      if (game) arr.push(game);
+    const arr = gameNameList.map((gameName) => {
+      return Memory.getGame(gameName);
     });
-    setGameList(arr);
+    const filteredArr: Game[] = arr.filter(function (element) {
+      return element !== undefined;
+    });
+    setGameList(filteredArr);
   };
 
   const onBtnPlay = (gameName: string) => {

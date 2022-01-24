@@ -8,39 +8,62 @@ import { Options } from "got/dist/source";
 import { Memory } from "../../Storage/GamePhases";
 import { clone } from "../../Utils/Cloner";
 import { FireStoreController } from "../../Storage/FireStoreController";
+import "../Sass/Store.scss";
 
 export function Store() {
-  const [games, setGames] = useState<Game[]>(FireStoreController.Instance.fetchGames(100, 0));
+  const [games, setGames] = useState<Game[]>([]);
+  const [loadingGames, setLoadingGames] = useState(false);
+
+  const prepareList = async () => {
+    const gameList: Game[] = await FireStoreController.Instance.getAllGames();
+    setGames(gameList);
+    Memory.setNewGameList(gameList);
+    setLoadingGames(false);
+  };
+
+  useEffect(() => {
+    if (!Memory.gameListExist()) {
+      setLoadingGames(true);
+      prepareList();
+    } else {
+      setGames(Memory.getGameList());
+    }
+  }, []);
 
   const onDownload = (name: string) => {
-    Memory.addGameToDownloads(name);
+    const index = games.findIndex((x, index) => {
+      return x.title == name;
+    });
+    Memory.addGameToDownloads(games[index]);
+  };
+
+  const onRefresh = () => {
+    setLoadingGames(true);
+    prepareList();
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "strech",
-        justifyContent: "center",
-      }}
-    >
-      {games == [] ? (
-        <h1>Loading Games...</h1>
-      ) : (
-        games.map((game) => {
-          return (
-            <GameCard
-              key={game.title}
-              title={game.title}
-              imgUrl={game.imgUrl}
-              btnLabel="Download"
-              onBtnClick={onDownload}
-            />
-          );
-        })
-      )}
+    <div>
+      <button id="refreshBtn" onClick={onRefresh}>
+        Refresh
+      </button>
+      <div className="gameList">
+        {loadingGames ? (
+          <div className="spinner"></div>
+        ) : (
+          games.map((game: any) => {
+            return (
+              <GameCard
+                key={game.title}
+                title={game.title}
+                imgUrl={game.imgUrl}
+                btnLabel="Download"
+                onBtnClick={onDownload}
+              />
+            );
+          })
+        )}
+      </div>
     </div>
   );
 }

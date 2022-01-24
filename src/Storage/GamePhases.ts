@@ -8,10 +8,10 @@ class Storage {
     }
   }
 
-  private getValueLocalStorage(nameLocalStorage: string): string[] {
+  private getValueLocalStorage(nameLocalStorage: string): any {
     let valueStringlify = localStorage.getItem(nameLocalStorage);
     if (valueStringlify == null) return [];
-    const value: string[] = JSON.parse(valueStringlify);
+    const value: Game[] = JSON.parse(valueStringlify);
     return value;
   }
 
@@ -19,33 +19,65 @@ class Storage {
     localStorage.setItem(nameLocalStorage, JSON.stringify(value));
   }
 
-  private addGameToPhase(gameName: string, phase: string) {
+  private addGameToPhase(game: Game, phase: string) {
     this.checkLocalSotrage(phase);
     const gamePhasesArr = this.getValueLocalStorage(phase);
-    if (!gamePhasesArr.includes(gameName)) gamePhasesArr.push(gameName);
+    //if (!gamePhasesArr.includes(game)) gamePhasesArr.push(game); // problem
+    if (gamePhasesArr.length == 0) {
+      gamePhasesArr.push(game);
+    } else {
+      const gameInList = gamePhasesArr.some((x: Game) => x.title == game.title);
+      if (!gameInList) gamePhasesArr.push(game);
+    }
+
     this.setValueLocalStorage(phase, gamePhasesArr);
   }
 
-  private removeGameFromPhase(gameName: string, phase: string) {
+  private setGameList(games: Game[], phase: string) {
     this.checkLocalSotrage(phase);
     const gamePhasesArr = this.getValueLocalStorage(phase);
-    const index = gamePhasesArr.indexOf(gameName);
-    if (index != -1) {
+    this.setValueLocalStorage(phase, games);
+  }
+
+  private removeGameFromPhase(gameTitle: string, phase: string) {
+    this.checkLocalSotrage(phase);
+    const gamePhasesArr = this.getValueLocalStorage(phase);
+    const index = gamePhasesArr.findIndex((x: Game, fromIndex: number) => {
+      return x.title == gameTitle;
+    });
+    if (index >= 0) {
       gamePhasesArr.splice(index, 1);
     }
     this.setValueLocalStorage(phase, gamePhasesArr);
   }
 
-  addGameToDownloads(gameName: string) {
-    this.addGameToPhase(gameName, "gamesOnDownload");
+  setNewGameList(games: Game[]): void {
+    this.setGameList(games, "games");
   }
 
-  removeGameFromDownloads(name: string) {
-    console.log("Removing: " + name);
-    this.removeGameFromPhase(name, "gamesOnDownload");
+  gameListExist(): boolean {
+    return localStorage.getItem("games") != null;
   }
 
-  getOnDownloadListGames(): string[] {
+  getGameList(): Game[] {
+    return this.getValueLocalStorage("games");
+  }
+
+  getGame(title: string): Game | undefined {
+    const gameList = this.getGameList();
+    return gameList.find((game) => game.title == title);
+  }
+
+  addGameToDownloads(game: Game) {
+    this.addGameToPhase(game, "gamesOnDownload");
+  }
+
+  removeGameFromDownloads(title: string) {
+    console.log("Removing: " + title);
+    this.removeGameFromPhase(title, "gamesOnDownload");
+  }
+
+  getOnDownloadListGames(): Game[] {
     this.checkLocalSotrage("gamesOnDownload");
     return this.getValueLocalStorage("gamesOnDownload");
   }
