@@ -1,5 +1,6 @@
 import React from "react";
 import "../Sass/GameCard.scss";
+import { message } from "antd";
 
 interface props {
   title: string;
@@ -19,7 +20,12 @@ export const GameCard = (props: props) => {
       ) : null}
       <img src={props.imgUrl} />
       <h2>{props.title}</h2>
-      <button id="mainBtn" onClick={() => props.onBtnClick(props.title)}>
+      <button
+        id="mainBtn"
+        onClick={() => {
+          props.onBtnClick(props.title);
+        }}
+      >
         {props.btnLabel}
       </button>
     </div>

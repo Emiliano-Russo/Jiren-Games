@@ -7,12 +7,13 @@ import { Downloads } from "../../Screens/React/Downloads";
 import { Store } from "../../Screens/React/Store";
 import { Library } from "../../Screens/React/Library";
 import { Admin } from "../../Screens/React/Admin";
+import "antd/dist/antd.css";
+import { useSelector } from "react-redux";
 
 export default function App() {
-  useEffect(() => {}, []);
-
+  const theme = useSelector((state) => state.theme.theme);
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundImage: theme.bodyBackgroundColor }}>
       <HashRouter>
         <Header />
         <Routes>

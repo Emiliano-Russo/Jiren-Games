@@ -49,7 +49,7 @@ export function Admin() {
     console.log("Submiting...");
     const gameID: string = document.getElementById("gameID")?.value;
     const newGame = {
-      title: document.getElementById("gameID")?.value,
+      title: document.getElementById("title")?.value,
       description: document.getElementById("description")?.value,
       downloadLinks: document.getElementById("downloadLinks")?.value.split(","),
       crackUrl: document.getElementById("crackUrl")?.value,

@@ -7,6 +7,7 @@ import { FireStoreController } from "../../Storage/FireStoreController";
 import { Game } from "../../Models/Game";
 import "../Sass/Downloads.scss";
 import { clone } from "../../Utils/Cloner";
+import { Spin } from "antd";
 
 const { ipcRenderer } = window.require("electron");
 
@@ -14,6 +15,7 @@ export function Downloads() {
   const [gameList, setGameList] = useState(Memory.getOnDownloadListGames());
   const [downloadingGameName, setDownloadingGameName] = useState<string>("");
   const [feedBack, setFeedBack] = useState<string>("");
+  const theme = useSelector((state) => state.theme.theme);
 
   function onDownloadReady(event: any, arg: any) {
     Memory.removeGameFromDownloads(arg);
@@ -57,7 +59,7 @@ export function Downloads() {
   return (
     <div className="downloads">
       <div id="#style-6" className="queue">
-        <h1>Queue</h1>
+        <h1 style={{ color: theme.letterColor }}>Queue</h1>
         <div className="backgroundQueue">
           {gameList.map((game) => {
             return (
@@ -74,9 +76,9 @@ export function Downloads() {
         </div>
       </div>
       <div className="downloading">
-        <p>{downloadingGameName}</p>
-        {feedBack}
-        {downloadingGameName != "" ? <div className="spinner"></div> : null}
+        <h1 style={{ color: theme.letterColor }}>{downloadingGameName}</h1>
+        <h2>{feedBack}</h2>
+        {downloadingGameName != "" ? <Spin size="large" style={{ marginTop: "2rem" }} /> : null}
       </div>
     </div>
   );

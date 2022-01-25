@@ -1,19 +1,19 @@
-@import "./Background.scss";
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 .App {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   //text-align: center;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   min-height: 100vh;
   height: max-content;
 }
 
 body {
   margin: 0;
+  background: rgb(43, 52, 81);
 }
 
 * {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 //Background section

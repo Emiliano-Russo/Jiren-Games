@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../Sass/Header.scss";
+import { Drawer, Button } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
+import { ThemePicker } from "./ThemePicker";
+
+import { useSelector } from "react-redux";
 
 export function Header() {
   const [showAdminRoute, setShowAdminRoute] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const theme = useSelector((state) => state.theme.theme);
 
   useEffect(() => {
     const result = localStorage.getItem("ShowAdminRoute");
@@ -15,34 +23,59 @@ export function Header() {
     return () => {
       document.removeEventListener("keydown", escFunction, false);
     };
-  }, []);
+  }, [theme]);
 
   function escFunction(event: any) {
     if (event.keyCode === 123) {
-      console.log("F12 Pressed");
       setShowAdminRoute((prev) => {
         localStorage.setItem("ShowAdminRoute", JSON.stringify(!prev));
         return !prev;
       });
-      //Do whatever when esc is pressed
     }
   }
 
   return (
-    <div className="header">
-      <h1>Jiren Games</h1>
+    <div className="header" style={{ backgroundImage: theme.headerBackgroundColor }}>
+      <div id="div">
+        <Button
+          id="hamburger"
+          type="link"
+          onClick={() => setDrawerVisible(true)}
+          icon={<MenuOutlined style={{ color: theme.letterColor }} />}
+        />
+        <Drawer title="Hello :)" placement="left" onClose={() => setDrawerVisible(false)} visible={drawerVisible}>
+          <ThemePicker />
+        </Drawer>
+        <h1 style={{ color: theme.letterColor }}>Jiren Games</h1>
+      </div>
       <div id="links">
-        <NavLink to="/" className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}
+          style={{ color: theme.letterColor }}
+        >
           Store
         </NavLink>
-        <NavLink to="/download" className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}>
+        <NavLink
+          to="/download"
+          className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}
+          style={{ color: theme.letterColor }}
+        >
           Downloads
         </NavLink>
-        <NavLink to="/library" className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}>
+        <NavLink
+          to="/library"
+          className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}
+          style={{ color: theme.letterColor }}
+        >
           Library
         </NavLink>
         {showAdminRoute ? (
-          <NavLink to="/admin" className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}>
+          <NavLink
+            to="/admin"
+            className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}
+            style={{ color: theme.letterColor }}
+          >
             Admin
           </NavLink>
         ) : null}

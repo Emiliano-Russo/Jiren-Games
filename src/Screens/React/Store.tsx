@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Game } from "../../Models/Game";
 import { GameCard } from "../../Components/React/GameCard";
-import { useDispatch } from "react-redux";
-import { addDownload } from "../../Redux/downloadSlice";
-import { useNavigate } from "react-router-dom";
-import { Options } from "got/dist/source";
 import { Memory } from "../../Storage/GamePhases";
-import { clone } from "../../Utils/Cloner";
 import { FireStoreController } from "../../Storage/FireStoreController";
+import { Button, Spin } from "antd";
 import "../Sass/Store.scss";
+import { message } from "antd";
 
 export function Store() {
   const [games, setGames] = useState<Game[]>([]);
   const [loadingGames, setLoadingGames] = useState(false);
+
+  const success = (title: string) => {
+    message.success(title + " => Now in Downloads");
+  };
 
   const prepareList = async () => {
     const gameList: Game[] = await FireStoreController.Instance.getAllGames();
@@ -35,6 +36,7 @@ export function Store() {
       return x.title == name;
     });
     Memory.addGameToDownloads(games[index]);
+    success(name);
   };
 
   const onRefresh = () => {
@@ -44,12 +46,12 @@ export function Store() {
 
   return (
     <div>
-      <button id="refreshBtn" onClick={onRefresh}>
+      <Button id="refreshBtn" onClick={onRefresh}>
         Refresh
-      </button>
+      </Button>
       <div className="gameList">
         {loadingGames ? (
-          <div className="spinner"></div>
+          <Spin size="large" />
         ) : (
           games.map((game: any) => {
             return (

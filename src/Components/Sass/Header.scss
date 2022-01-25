@@ -5,20 +5,32 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5rem;
+  padding: 1rem 5rem;
   color: white;
-  background-color: rgba(43, 52, 81, 1);
+  background-color: rgb(32, 67, 170);
   #links {
     //border: 1px solid $secondary-color-light;
     width: 20rem;
     display: flex;
     justify-content: space-evenly;
   }
+  h1 {
+    margin: 0;
+  }
+  #div {
+    position: relative;
+    button {
+      position: absolute;
+      left: -70px;
+      top: 5px;
+    }
+  }
 }
 
 .activeLink {
-  color: salmon;
+  color: rgb(255, 106, 106);
   font-weight: bold;
+  text-decoration: underline;
 }
 
 .idleLink {
