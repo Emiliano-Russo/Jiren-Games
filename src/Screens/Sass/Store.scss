@@ -1,14 +1,15 @@
 #refreshBtn {
   background-color: white;
-  padding: 5px 10px;
-  border: 1px solid gray;
+  padding: 10px 15px;
   border-radius: 10px;
+  border: 1px solid black;
   margin-top: 1rem;
-  margin-left: auto;
+  margin-left: 2rem;
+  position: absolute;
 }
 
 #refreshBtn:hover {
-  background-color: violet;
+  background-color: salmon;
   color: white;
   cursor: pointer;
 }

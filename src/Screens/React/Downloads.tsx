@@ -58,18 +58,20 @@ export function Downloads() {
     <div className="downloads">
       <div id="#style-6" className="queue">
         <h1>Queue</h1>
-        {gameList.map((game) => {
-          return (
-            <GameCard
-              key={game.title}
-              btnLabel="Start Download"
-              onClose={onRemove}
-              onBtnClick={onStartDownload}
-              title={game.title}
-              imgUrl={game.imgUrl ? game.imgUrl : "https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg"}
-            />
-          );
-        })}
+        <div className="backgroundQueue">
+          {gameList.map((game) => {
+            return (
+              <GameCard
+                key={game.title}
+                btnLabel="Start Download"
+                onClose={onRemove}
+                onBtnClick={onStartDownload}
+                title={game.title}
+                imgUrl={game.imgUrl ? game.imgUrl : "https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg"}
+              />
+            );
+          })}
+        </div>
       </div>
       <div className="downloading">
         <p>{downloadingGameName}</p>

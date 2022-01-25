@@ -10,13 +10,15 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
+  color: black;
+  text-align: center;
 
   .closeBtn {
     position: absolute;
     right: -10px;
     top: -10px;
-    background-color: $color-c;
-    color: white;
+    background-color: rgb(250, 102, 102);
+    color: rgb(245, 245, 245);
     padding: 5px 10px;
     border: none;
     border-radius: 10px;
@@ -37,7 +39,7 @@
 
   #mainBtn {
     width: max-content;
-    background-color: royalblue;
+    background-color: rgba(43, 52, 81, 1);
     border-radius: 8px;
     border-style: none;
     box-sizing: border-box;

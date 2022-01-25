@@ -1,3 +1,4 @@
+@import "./Spinner.scss";
 .downloads {
   display: flex;
   flex-direction: row;
@@ -9,9 +10,6 @@
     align-items: flex-start;
     justify-content: center;
     text-align: center;
-    background: rgb(2, 0, 36);
-    background-size: 56.57px 56.57px;
-    background-size: 56.57px 56.57px;
     width: 50rem;
     overflow-y: scroll;
     h1 {
@@ -20,13 +18,11 @@
   }
   .downloading {
     display: flex;
+    text-align: center;
     flex-direction: column;
-    background-color: white;
     width: 100%;
     h1 {
-      color: rgb(51, 51, 53);
+      color: rgb(243, 243, 245);
     }
   }
 }
-
-@import "./Spinner.scss";

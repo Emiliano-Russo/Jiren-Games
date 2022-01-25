@@ -6,23 +6,23 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 5rem;
-  color: $color-c;
+  color: white;
+  background-color: rgba(43, 52, 81, 1);
   #links {
     //border: 1px solid $secondary-color-light;
     width: 20rem;
     display: flex;
     justify-content: space-evenly;
   }
-  border-bottom: 1px solid $color-d;
 }
 
 .activeLink {
-  color: $color-c;
+  color: salmon;
   font-weight: bold;
 }
 
 .idleLink {
-  color: $color-d;
+  color: white;
 }
 
 .link {

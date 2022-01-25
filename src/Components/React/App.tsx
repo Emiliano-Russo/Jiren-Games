@@ -6,6 +6,7 @@ import { Header } from "./Header";
 import { Downloads } from "../../Screens/React/Downloads";
 import { Store } from "../../Screens/React/Store";
 import { Library } from "../../Screens/React/Library";
+import { Admin } from "../../Screens/React/Admin";
 
 export default function App() {
   useEffect(() => {}, []);
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/" element={<Store />} />
           <Route path="/download" element={<Downloads />} />
           <Route path="/library" element={<Library />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </HashRouter>
     </div>
