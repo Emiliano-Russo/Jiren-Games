@@ -4,6 +4,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import "../Sass/Admin.scss";
 import { resolve } from "path";
 import { FireStoreController } from "../../Storage/FireStoreController";
+import { message } from "antd";
 
 enum LoginState {
   Checking,
@@ -13,6 +14,10 @@ enum LoginState {
 
 export function Admin() {
   const [logged, setLogged] = useState(LoginState.Checking);
+
+  const success = () => {
+    message.success("Game Uploaded");
+  };
 
   useEffect(() => {
     const notParsedToken = localStorage.getItem("adminToken");
@@ -45,7 +50,7 @@ export function Admin() {
       </div>
     );
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log("Submiting...");
     const gameID: string = document.getElementById("gameID")?.value;
     const newGame = {
@@ -59,7 +64,8 @@ export function Admin() {
     };
     console.log("obj to send: ");
     console.log(newGame);
-    FireStoreController.Instance.addGame(gameID, newGame);
+    const res = await FireStoreController.Instance.addGame(gameID, newGame);
+    success();
   };
 
   return (

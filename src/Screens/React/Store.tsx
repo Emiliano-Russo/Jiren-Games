@@ -6,6 +6,7 @@ import { FireStoreController } from "../../Storage/FireStoreController";
 import { Button, Spin } from "antd";
 import "../Sass/Store.scss";
 import { message } from "antd";
+import { ReloadOutlined } from "@ant-design/icons";
 
 export function Store() {
   const [games, setGames] = useState<Game[]>([]);
@@ -46,12 +47,11 @@ export function Store() {
 
   return (
     <div>
-      <Button id="refreshBtn" onClick={onRefresh}>
-        Refresh
-      </Button>
+      <Button id="refreshBtn" onClick={onRefresh} icon={<ReloadOutlined />} />
+
       <div className="gameList">
         {loadingGames ? (
-          <Spin size="large" />
+          <Spin size="large" style={{ marginTop: "2rem" }} />
         ) : (
           games.map((game: any) => {
             return (
