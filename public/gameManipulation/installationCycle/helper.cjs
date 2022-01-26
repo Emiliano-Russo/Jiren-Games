@@ -15,6 +15,7 @@ module.exports.getFileName = function getFileName(linkWeb, serverName) {
 module.exports.detectCompressionType = function detectCompressionType(url) {
   if (url.includes(".rar")) return "rar";
   if (url.includes(".zip")) return "zip";
+  if (url.includes(".7z")) return "7z";
   return "other";
 };
 

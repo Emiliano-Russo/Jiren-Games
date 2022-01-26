@@ -1,6 +1,7 @@
 const StreamZip = require("node-stream-zip");
 const fs = require("fs");
 const unrar = require("unrar-promise");
+const _7z = require("7zip-min");
 const { detectCompressionType, createFolder } = require("./helper.cjs");
 
 module.exports.unCompress = function unCompress(location, dest) {
@@ -12,6 +13,9 @@ module.exports.unCompress = function unCompress(location, dest) {
       resolve(result);
     } else if (compressionType == "zip") {
       const result = await uncompressZip(location, dest);
+      resolve(result);
+    } else if (compressionType == "7z") {
+      const result = unCompress7z(location, dest);
       resolve(result);
     } else {
       reject("Can't uncompress this file (make sure is either .zip or .rar)");
@@ -39,4 +43,10 @@ function uncompressZip(zipLocation, folderDest) {
 
 function unCompressRar(rarLocation, dest) {
   return unrar.unrar(rarLocation, dest);
+}
+
+function unCompress7z(location, dest) {
+  _7z.unpack(location, dest, (err) => {
+    console.log("Done!");
+  });
 }
