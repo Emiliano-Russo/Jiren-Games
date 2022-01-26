@@ -50,6 +50,13 @@ export function Header() {
       </div>
       <div id="links">
         <NavLink
+          to="/wish"
+          className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}
+          style={{ color: theme.letterColor }}
+        >
+          Wish
+        </NavLink>
+        <NavLink
           to="/"
           className={({ isActive }) => (isActive ? "activeLink link" : "idleLink link")}
           style={{ color: theme.letterColor }}

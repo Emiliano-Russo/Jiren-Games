@@ -9,6 +9,7 @@ const username = os.userInfo().username;
 const { playGame } = require("./gameManipulation/gameStarter.cjs");
 const { deleteGame } = require("./gameManipulation/gameRemover.cjs");
 const { getInstalledGames } = require("./gameManipulation/gameFinder.cjs");
+const { getPage } = require("./wish/main.cjs");
 
 const dir = "C:/Users/" + username + "/Documents/JirenGames";
 if (!fs.existsSync(dir)) {
@@ -70,4 +71,13 @@ ipcMain.on("play-game", function (event, gameName) {
 
 ipcMain.on("delete-game", function (event, gameName) {
   deleteGame(gameName, dir);
+});
+
+ipcMain.on("delete-game", function (event, gameName) {
+  deleteGame(gameName, dir);
+});
+
+ipcMain.on("get-page", function (event, pageNmbr) {
+  console.log("IPCMAIN.ON (GET-PAGE)");
+  getPage(pageNmbr, event);
 });
