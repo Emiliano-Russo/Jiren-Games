@@ -11,7 +11,7 @@ export function Header() {
   const [showAdminRoute, setShowAdminRoute] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
-  const theme = useSelector((state) => state.theme.theme);
+  const theme = useSelector((state: any) => state.theme.theme);
 
   useEffect(() => {
     const result = localStorage.getItem("ShowAdminRoute");

@@ -21,7 +21,20 @@ export function Library() {
 
   const onGettingInstalledGames = (event: any, gameNameList: string[]) => {
     const arr = gameNameList.map((gameName) => {
-      return Memory.getGame(gameName);
+      const game = Memory.getGame(gameName);
+      if (game != undefined) {
+        const gameNotUndefined = game;
+        return gameNotUndefined;
+      } else {
+        return {
+          title: "error",
+          description: "error",
+          downloadLinks: ["error"],
+          imgUrl: "error",
+          totalSize: "error",
+          youtubeTrailerUrl: "error",
+        };
+      }
     });
     const filteredArr: Game[] = arr.filter(function (element) {
       return element !== undefined;

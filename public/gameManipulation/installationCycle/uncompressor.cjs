@@ -18,7 +18,7 @@ module.exports.unCompress = function unCompress(location, dest) {
       const result = unCompress7z(location, dest);
       resolve(result);
     } else {
-      reject("Can't uncompress this file (make sure is either .zip or .rar)");
+      reject("Can't uncompress this file");
     }
   });
 };

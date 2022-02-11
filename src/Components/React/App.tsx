@@ -12,7 +12,7 @@ import "antd/dist/antd.css";
 import { useSelector } from "react-redux";
 
 export default function App() {
-  const theme = useSelector((state) => state.theme.theme);
+  const theme = useSelector((state: any) => state.theme.theme);
   return (
     <div className="App" style={{ backgroundImage: theme.bodyBackgroundColor }}>
       <HashRouter>

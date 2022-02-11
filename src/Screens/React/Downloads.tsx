@@ -15,7 +15,7 @@ export function Downloads() {
   const [gameList, setGameList] = useState(Memory.getOnDownloadListGames());
   const [downloadingGameName, setDownloadingGameName] = useState<string>("");
   const [feedBack, setFeedBack] = useState<string>("");
-  const theme = useSelector((state) => state.theme.theme);
+  const theme = useSelector((state: any) => state.theme.theme);
 
   function onDownloadReady(event: any, arg: any) {
     Memory.removeGameFromDownloads(arg);

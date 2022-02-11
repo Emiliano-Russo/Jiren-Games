@@ -30,7 +30,7 @@ export function Admin() {
 
   const login = async () => {
     setLogged(LoginState.Checking);
-    const element = document.getElementById("inputToken");
+    const element = document.getElementById("inputToken") as HTMLInputElement;
     const inputTkn = element?.value;
     const isValidToken = await FireStoreController.Instance.tokenIsValid(inputTkn);
     if (isValidToken) {
@@ -52,15 +52,15 @@ export function Admin() {
 
   const onSubmit = async () => {
     console.log("Submiting...");
-    const gameID: string = document.getElementById("gameID")?.value;
+    const gameID: string = (document.getElementById("gameID") as HTMLInputElement)?.value;
     const newGame = {
-      title: document.getElementById("title")?.value,
-      description: document.getElementById("description")?.value,
-      downloadLinks: document.getElementById("downloadLinks")?.value.split(","),
-      crackUrl: document.getElementById("crackUrl")?.value,
-      totalSize: document.getElementById("totalSize")?.value,
-      youtubeTrailerUrl: document.getElementById("youtubeTrailerUrl")?.value,
-      imgUrl: document.getElementById("imgUrl")?.value,
+      title: (document.getElementById("title") as HTMLInputElement)?.value,
+      description: (document.getElementById("description") as HTMLInputElement)?.value,
+      downloadLinks: (document.getElementById("downloadLinks") as HTMLInputElement)?.value.split(","),
+      crackUrl: (document.getElementById("crackUrl") as HTMLInputElement)?.value,
+      totalSize: (document.getElementById("totalSize") as HTMLInputElement)?.value,
+      youtubeTrailerUrl: (document.getElementById("youtubeTrailerUrl") as HTMLInputElement)?.value,
+      imgUrl: (document.getElementById("imgUrl") as HTMLInputElement)?.value,
     };
     console.log("obj to send: ");
     console.log(newGame);

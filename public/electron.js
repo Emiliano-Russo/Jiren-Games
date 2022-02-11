@@ -27,9 +27,10 @@ const createWindow = () => {
       devTools: isDev, // toggles whether devtools are available. to use node write window.require('<node-name>')
       nodeIntegration: true, // turn this off if you don't mean to use node
       enableRemoteModule: true,
+      contextIsolation: false,
     },
   });
-
+  //dialog.showErrorBox("ERROR");
   // load the index.html of the app. (or localhost on port 3000 if you're in development)
   mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`);
 
@@ -54,6 +55,13 @@ app.on("ready", () => {
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
   // if (process.platform !== "darwin") app.quit();
+  console.log("window-all-closed!");
+  app.quit();
+});
+
+app.on("quit", () => {
+  console.log("quit!");
+  app.quit();
 });
 
 ipcMain.on("download", async function (event, game) {
